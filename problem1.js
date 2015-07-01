@@ -60,32 +60,32 @@ function a () {
 
 // eventproxy
 function e () {
-var ep = eventproxy();
-ep.fail(function(err) {
-  throw err;
-});
+  var ep = eventproxy();
+  ep.fail(function(err) {
+    throw err;
+  });
 
-ep.once('result', function(result) {
-  console.log('eventproxy:', result.toString());
-});
+  ep.once('result', function(result) {
+    console.log('eventproxy:', result.toString());
+  });
 
-ep.once('json', function(json) {
-  fs.readFile('./resources/'+json['hello'], ep.done('result'));
-});
+  ep.once('json', function(json) {
+    fs.readFile('./resources/'+json['hello'], ep.done('result'));
+  });
 
-ep.once('number', function(number) {
-  number = _.trim(number);
-  fs.readFile('./resources/json'+number, ep.done(function(bufJson) {
-    try {
-      var json = JSON.parse(bufJson.toString());
-      ep.emit('json', json);
-    } catch (e) {
-      ep.throw('json pasrse err.');
-    }
-  }));
-});
+  ep.once('number', function(number) {
+    number = _.trim(number);
+    fs.readFile('./resources/json'+number, ep.done(function(bufJson) {
+      try {
+        var json = JSON.parse(bufJson.toString());
+        ep.emit('json', json);
+      } catch (e) {
+        ep.throw('json pasrse err.');
+      }
+    }));
+  });
 
-fs.readFile('./resources/number', ep.done('number'));
+  fs.readFile('./resources/number', ep.done('number'));
 }
 
 r();
