@@ -1,0 +1,24 @@
+{
+  "name": "eventproxy-example",
+  "version": "0.0.0",
+  "description": "Examples for using EventProxy @ https://github.com/JacksonTian/eventproxy",
+  "dependencies": {
+    "async": "1.3.0",
+    "eventproxy": "0.3.4",
+    "lodash": "3.10.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/albin3/eventproxy-example.git"
+  },
+  "author": "Albin Zeng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/albin3/eventproxy-example/issues"
+  },
+  "homepage": "https://github.com/albin3/eventproxy-example"
+}
