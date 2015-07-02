@@ -56,10 +56,25 @@ fs.readFile('./resources/number', ep.done('number'));
 
 工作流
 
-```
+```js
 readnumber   readstring   readkey
     v            v           v
                result
 ```
 
-1. 同时读取结果
+1. 同时读取number、string、key的值并显示
+
+```js
+var files = ['./resources/number', './resources/string', './resources/key'];
+var ep = eventproxy();
+ep.fail(function(err) {
+  throw err;
+});
+ep.after('file', files.length, function(result) {
+  console.log('eventproxy: '+result[0].toString()+result[1].toString()+result[2].toString());
+});
+for (var i=0; i<files.length; i++) {
+  fs.readFile(files[i], ep.group('file'));
+}
+```
+
