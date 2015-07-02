@@ -3,17 +3,18 @@ Examples for using EventProxy @ https://github.com/JacksonTian/eventproxy
 
 ## 异步分类
 
-###1深层嵌套
+###1串行深层嵌套
 
 工作流
 
 ```js
 readNumber
-    v
+   v
 readJson
-    v
+   v
 readResult
-
+   v
+answer
 ```
 
 1. 读取`./resources/number`得到`number`
@@ -50,3 +51,15 @@ ep.once('number', function(number) {
 
 fs.readFile('./resources/number', ep.done('number'));
 ```
+
+###2并行深层嵌套
+
+工作流
+
+```
+readnumber   readstring   readkey
+    v            v           v
+               result
+```
+
+1. 同时读取结果
