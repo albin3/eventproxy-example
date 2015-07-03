@@ -1,6 +1,8 @@
 # eventproxy-example
 Examples for using EventProxy @ https://github.com/JacksonTian/eventproxy
 
+源码中包含使用[Async](https://github.com/caolan/async)的写法
+
 ## 异步分类
 
 ###1串行深层嵌套
@@ -78,3 +80,4 @@ for (var i=0; i<files.length; i++) {
 }
 ```
 
+###3
