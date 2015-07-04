@@ -9,7 +9,7 @@ Examples for using EventProxy @ https://github.com/JacksonTian/eventproxy
 
 工作流
 
-```js
+```
 readNumber
    v
 readJson
@@ -58,7 +58,7 @@ fs.readFile('./resources/number', ep.done('number'));
 
 工作流
 
-```js
+```
 readnumber   readstring   readkey
     v            v           v
                result
@@ -80,4 +80,38 @@ for (var i=0; i<files.length; i++) {
 }
 ```
 
-###3
+###3混合嵌套
+
+工作流
+
+```
+          readfilename as file      readnumber as n
+                   v                    v
+           read(file) as f              v
+                   v                    v
+                          result = f[n]
+```
+
+1. 读取filename得到file, 并行读取number记为n
+2. 读取file得到f
+3. 返回f的第n个字符
+
+```
+var ep = eventproxy();
+ep.fail(function(err) {
+  throw err;
+});
+
+ep.all('file', 'number', function(file, number) {
+  var f = _.trim(file);
+  var n = parseInt(_.trim(number));
+  console.log('eventproxy: '+f[n]);
+});
+
+ep.once('filename', function(filename) {
+  fs.readFile('./resources/'+_.trim(filename), ep.done('file'));
+});
+
+fs.readFile('./resources/filename', ep.done('filename'));
+fs.readFile('./resources/number', ep.done('number'));
+```

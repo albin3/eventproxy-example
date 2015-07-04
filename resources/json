@@ -1,4 +1,4 @@
 {
-  "hello": "world",
-  "key": "value"
+  "number": "number",
+  "string": "string"
 }
