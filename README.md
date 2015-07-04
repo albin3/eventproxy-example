@@ -96,7 +96,7 @@ for (var i=0; i<files.length; i++) {
 2. 读取file得到f
 3. 返回f的第n个字符
 
-```
+```js
 var ep = eventproxy();
 ep.fail(function(err) {
   throw err;
