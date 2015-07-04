@@ -1,7 +1,7 @@
 # eventproxy-example
 Examples for using EventProxy @ https://github.com/JacksonTian/eventproxy
 
-`problemx.js`中包含使用[Async](https://github.com/caolan/async)的写法
+`problemx.js`中包含使用[Async](https://github.com/caolan/async)、[Bluebird](https://github.com/petkaantonov/bluebird)的写法
 
 ## 异步分类
 
