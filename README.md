@@ -1,11 +1,11 @@
 # eventproxy-example
 Examples for using EventProxy @ https://github.com/JacksonTian/eventproxy
 
-源码中包含使用[Async](https://github.com/caolan/async)的写法
+`problemx.js`中包含使用[Async](https://github.com/caolan/async)的写法
 
 ## 异步分类
 
-###1串行深层嵌套
+###问题1串行深层嵌套
 
 工作流
 
@@ -54,7 +54,7 @@ ep.once('number', function(number) {
 fs.readFile('./resources/number', ep.done('number'));
 ```
 
-###2并行深层嵌套
+###问题2并行深层嵌套
 
 工作流
 
@@ -80,7 +80,7 @@ for (var i=0; i<files.length; i++) {
 }
 ```
 
-###3混合嵌套
+###问题3混合嵌套
 
 工作流
 
