@@ -3,6 +3,8 @@
 var fs = require('fs');
 var async = require('async');
 var eventproxy = require('eventproxy');
+var Promise = require('bluebird');
+var fsp = Promise.promisifyAll(fs);
 var _ = require('lodash');
 
 // raw
@@ -45,6 +47,41 @@ function e () {
   }
 }
 
+// bluebird
+function b () {
+  var current = Promise.resolve();
+  var files = ['./resources/number', './resources/string', './resources/key'];
+  Promise.map(files, function(file) {
+    current = current.then(function() {
+      return fsp.readFileAsync(file);
+    });
+    return current;
+  }).then(function(result) {
+    console.log('bluebird: '+result[0].toString()+result[1].toString()+result[2].toString());
+  }).catch(function(e) {
+    throw e;
+  });
+}
+
+
 r();
 a();
 e();
+b();
+
+//*******************output*********************
+//async: 1
+//i am a string.
+//hello
+//
+//eventproxy: 1
+//i am a string.
+//hello
+//
+//raw: 1
+//i am a string.
+//hello
+//
+//bluebird: 1
+//i am a string.
+//hello
