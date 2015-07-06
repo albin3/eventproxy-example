@@ -3,6 +3,8 @@
 var fs = require('fs');
 var async = require('async');
 var eventproxy = require('eventproxy');
+var Promise = require('bluebird');
+var fsp = Promise.promisifyAll(fs);
 var _ = require('lodash');
 
 function r () {
@@ -66,10 +68,28 @@ function e () {
   fs.readFile('./resources/number', ep.done('number'));
 }
 
+function b () {
+  var file = fsp.readFileAsync('./resources/filename').then(function(filename) {
+    return fsp.readFileAsync('./resources/'+_.trim(filename));
+  });
+  var number = fsp.readFileAsync('./resources/number');
+
+  Promise.settle([file, number]).then(function(results) {
+    var f = _.trim(results[0]._settledValue)
+    var n = parseInt(results[1]._settledValue);
+    console.log('bluebird: '+f[n]);
+  }).catch(function(err) {
+    throw err;
+  });
+}
+
 r();
 a();
 e();
+b();
 
+//****output*****
 //eventproxy: e
+//bluebird: e
 //async: e
 //raw: e
