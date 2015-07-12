@@ -115,3 +115,23 @@ ep.once('filename', function(filename) {
 fs.readFile('./resources/filename', ep.done('filename'));
 fs.readFile('./resources/number', ep.done('number'));
 ```
+
+###问题4复杂混合嵌套
+
+工作流
+
+```
+               readListJson
+                     v
+      item1        item2          item3
+        v            v              v
+     getValue     getValue      getValue
+        v            v              v
+     saveitem1   saveitem2      saveitem3
+                     v
+                    end
+```
+
+1. 读取ListItem，获取里面需要处理的数据
+2. 对每个item，先读取item指向的json
+3. 将每个json保存到各自的文件中
