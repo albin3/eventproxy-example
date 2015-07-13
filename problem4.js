@@ -95,7 +95,7 @@ function b () {
      }).catch(function(err) {
        throw err;
      });
-     /* TODO: 下面这种写法速度会很快，直接让bluebird运行速度排在第一，待确定原因
+     /* 下面这种写法速度会很快，直接让bluebird运行速度排在第一，待确定原因
      .then(function (list) {
        return Promise.map(list, function(item) {
          return fsp.readFileAsync('./resources/'+item['readFrom'])
