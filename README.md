@@ -135,3 +135,28 @@ fs.readFile('./resources/number', ep.done('number'));
 1. 读取ListItem，获取里面需要处理的数据
 2. 对每个item，先读取item指向的json
 3. 将每个json保存到各自的文件中
+
+```js
+var ep = eventproxy();
+ep.fail(function(err) {
+  throw err;
+});
+
+ep.after('write', 3, function (result) {
+  console.log('eventproxy completed.');
+});
+
+ep.once('readJsonList', function(jsonList) {
+  var list = JSON.parse(_.trim(jsonList));
+  for (var i=0; i<list.length; i++) {
+    (function(item) {
+      fs.readFile('./resources/'+item['readFrom'], function(err, value) {
+        fs.writeFile('./resources/eventproxy_'+item['saveAs'], _.trim(value)+'\n'
+                    , ep.done('write'));
+      });
+    })(list[i]);
+  }
+});
+
+fs.readFile('./resources/jsonList', ep.done('readJsonList'));
+```
