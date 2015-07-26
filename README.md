@@ -85,11 +85,11 @@ for (var i=0; i<files.length; i++) {
 工作流
 
 ```
-          readfilename as file      readnumber as n
-                   v                    v
-           read(file) as f              v
-                   v                    v
-                          result = f[n]
+readfilename as file      readnumber as n
+         v                    v
+read(file) as f               v
+         v                    v
+                result = f[n]
 ```
 
 1. 读取filename得到file, 并行读取number记为n
@@ -121,15 +121,15 @@ fs.readFile('./resources/number', ep.done('number'));
 工作流
 
 ```
-               readListJson
-                     v
-      item1        item2          item3
-        v            v              v
-     getValue     getValue      getValue
-        v            v              v
-     saveitem1   saveitem2      saveitem3
-                     v
-                    end
+          readListJson
+                v
+ item1        item2          item3
+   v            v              v
+getValue     getValue      getValue
+   v            v              v
+saveitem1   saveitem2      saveitem3
+                v
+               end
 ```
 
 1. 读取ListItem，获取里面需要处理的数据
