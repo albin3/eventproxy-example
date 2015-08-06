@@ -1,4 +1,5 @@
 // problem four
+'use strict';
 
 var fs = require('fs');
 var async = require('async');
@@ -67,14 +68,16 @@ function e () {
   ep.once('readJsonList', function(jsonList) {
     var list = JSON.parse(_.trim(jsonList));
     for (var i=0; i<list.length; i++) {
-      (function(item) {
-        fs.readFile('./resources/'+item['readFrom'], function(err, value) {
-          fs.writeFile('./resources/eventproxy_'+item['saveAs'], _.trim(value)+'\n'
-                      , ep.done('write'));
-        });
-      })(list[i]);
+      readAndWriteFile(list[i]);
     }
   });
+
+  function readAndWriteFile(item) {
+    fs.readFile('./resources/'+item['readFrom'], function(err, value) {
+      fs.writeFile('./resources/eventproxy_'+item['saveAs'], _.trim(value)+'\n',
+      ep.done('write'));
+    });
+  }
 
   fs.readFile('./resources/jsonList', ep.done('readJsonList'));
 }

@@ -1,4 +1,5 @@
 // problem three
+'use strict';
 
 var fs = require('fs');
 var async = require('async');
@@ -75,7 +76,7 @@ function b () {
   var number = fsp.readFileAsync('./resources/number');
 
   Promise.settle([file, number]).then(function(results) {
-    var f = _.trim(results[0]._settledValue)
+    var f = _.trim(results[0]._settledValue);
     var n = parseInt(results[1]._settledValue);
     console.log('bluebird: '+f[n]);
   }).catch(function(err) {
