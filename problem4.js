@@ -13,13 +13,17 @@ function r () {
   fs.readFile('./resources/jsonList', function(err, jsonList) {
     if (err) throw err;
     var list = JSON.parse(_.trim(jsonList));
+
     list.forEach(function(item) {
       var readFrom = item['readFrom'];
+
       fs.readFile('./resources/'+readFrom, function (err, value) {
         if (err) throw err;
         var saveAs = item['saveAs'];
+
         fs.writeFile('./resources/raw_'+saveAs, _.trim(value)+'\n', function (err) {
           if (err) throw err;
+
           console.log('raw completed.');
         });
       });
@@ -32,6 +36,7 @@ function r () {
 function a () {
   fs.readFile('./resources/jsonList', function (err, jsonList) {
     if (err) throw err;
+
     var list = JSON.parse(_.trim(jsonList));
     async.each(list, function (item, cb) {
       async.waterfall([
@@ -55,7 +60,6 @@ function a () {
 
 //eventproxy
 function e () {
-
   var ep = eventproxy();
   ep.fail(function(err) {
     throw err;

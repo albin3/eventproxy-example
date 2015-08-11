@@ -10,18 +10,16 @@ var _ = require('lodash');
 
 // raw
 function r () {
-
   fs.readFile('./resources/number', function(err, number) {
-
     if (err) throw err;
     number = _.trim(number);
-    fs.readFile('./resources/json'+number, function(err, bufJson) {
 
+    fs.readFile('./resources/json'+number, function(err, bufJson) {
       if (err) throw err;
       try {
         var value = JSON.parse(bufJson.toString())['hello'];
-        fs.readFile('./resources/'+value, function(err, chunk) {
 
+        fs.readFile('./resources/'+value, function(err, chunk) {
           if (err) throw err;
           console.log('raw: ', chunk.toString());
         });
@@ -40,12 +38,14 @@ function a () {
     },
     getFilename: ['getNumber', function(cb, result) {
       var number = _.trim(result['getNumber']);
+
       fs.readFile('./resources/json'+number, cb);
     }],
     readResult: ['getFilename', function(cb, result) {
       var bufJson = result['getFilename'];
       try {
         var fileName = JSON.parse(bufJson.toString())['hello'];
+
         fs.readFile('./resources/'+fileName, cb);
       } catch (e) {
         throw 'json parse error.';
@@ -93,6 +93,7 @@ function e () {
 // bluebird
 function b () {
   var that = fsp;
+
   fsp.readFileAsync('./resources/number').then(function(number) {
     return fsp.readFileAsync('./resources/json'+_.trim(number));
   }).then(JSON.parse).then(function(json) {
