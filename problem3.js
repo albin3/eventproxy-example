@@ -1,6 +1,7 @@
 // problem three
 'use strict';
 
+var debug = require('debug')('problem3');
 var fs = require('fs');
 var async = require('async');
 var eventproxy = require('eventproxy');
@@ -20,7 +21,7 @@ function r () {
 
         var f = _.trim(file);
         var n = parseInt(_.trim(number));
-        console.log('raw: '+f[n]);
+        debug('raw: '+f[n]);
       });
     });
   });
@@ -45,7 +46,7 @@ function a () {
 
     var f = _.trim(result['r_file']);
     var n = parseInt(_.trim(result['r_number']));
-    console.log('async: '+f[n]);
+    debug('async: '+f[n]);
   });
 }
 
@@ -58,7 +59,7 @@ function e () {
   ep.all('file', 'number', function(file, number) {
     var f = _.trim(file);
     var n = parseInt(_.trim(number));
-    console.log('eventproxy: '+f[n]);
+    debug('eventproxy: '+f[n]);
   });
 
   ep.once('filename', function(filename) {
@@ -78,7 +79,7 @@ function b () {
   Promise.settle([file, number]).then(function(results) {
     var f = _.trim(results[0]._settledValue);
     var n = parseInt(results[1]._settledValue);
-    console.log('bluebird: '+f[n]);
+    debug('bluebird: '+f[n]);
   }).catch(function(err) {
     throw err;
   });

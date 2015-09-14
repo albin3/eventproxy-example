@@ -1,6 +1,7 @@
 // problem two
 'use strict';
 
+var debug = require('debug')('problem2');
 var fs = require('fs');
 var async = require('async');
 var eventproxy = require('eventproxy');
@@ -19,7 +20,7 @@ function r () {
       fs.readFile('./resources/key', function(err, key) {
         if (err) throw err;
 
-        console.log('raw: '+number.toString()+string.toString()+key.toString());
+        debug('raw: '+number.toString()+string.toString()+key.toString());
       });
     });
   });
@@ -30,7 +31,7 @@ function a () {
   async.map(['./resources/number', './resources/string', './resources/key'], fs.readFile, function(err, result) {
     if (err) throw err;
 
-    console.log('async: '+result[0].toString()+result[1].toString()+result[2].toString());
+    debug('async: '+result[0].toString()+result[1].toString()+result[2].toString());
   });
 }
 
@@ -43,7 +44,7 @@ function e () {
   });
 
   ep.after('file', files.length, function(result) {
-    console.log('eventproxy: '+result[0].toString()+result[1].toString()+result[2].toString());
+    debug('eventproxy: '+result[0].toString()+result[1].toString()+result[2].toString());
   });
 
   for (var i=0; i<files.length; i++) {
@@ -62,7 +63,7 @@ function b () {
     });
     return current;
   }).then(function(result) {
-    console.log('bluebird: '+result[0].toString()+result[1].toString()+result[2].toString());
+    debug('bluebird: '+result[0].toString()+result[1].toString()+result[2].toString());
   }).catch(function(e) {
     throw e;
   });

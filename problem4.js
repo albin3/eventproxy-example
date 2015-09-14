@@ -1,6 +1,7 @@
 // problem four
 'use strict';
 
+var debug = require('debug')('problem4');
 var fs = require('fs');
 var async = require('async');
 var eventproxy = require('eventproxy');
@@ -24,7 +25,7 @@ function r () {
         fs.writeFile('./resources/raw_'+saveAs, _.trim(value)+'\n', function (err) {
           if (err) throw err;
 
-          console.log('raw completed.');
+          debug('raw completed.');
         });
       });
     });
@@ -53,7 +54,7 @@ function a () {
       });
     }, function (err) {
       if (err) throw err;
-      console.log('async completed.');
+      debug('async completed.');
     });
   });
 }
@@ -66,7 +67,7 @@ function e () {
   });
 
   ep.after('write', 3, function (result) {
-    console.log('eventproxy completed.');
+    debug('eventproxy completed.');
   });
 
   ep.once('readJsonList', function(jsonList) {
@@ -98,7 +99,7 @@ function b () {
                                               _.trim(value)+'\n');
                  });
      }).then(function(results) {
-       console.log('bluebird completed.');
+       debug('bluebird completed.');
      }).catch(function(err) {
        throw err;
      });
@@ -112,7 +113,7 @@ function b () {
                    });
        });
      }).then(function(results) {
-       console.log('bluebird completed.');
+       debug('bluebird completed.');
      }).catch(function(err) {
        throw err;
      });

@@ -1,6 +1,7 @@
 // problem one
 'use strict';
 
+var debug = require('debug')('problem1');
 var fs = require('fs');
 var async = require('async');
 var eventproxy = require('eventproxy');
@@ -21,7 +22,7 @@ function r () {
 
         fs.readFile('./resources/'+value, function(err, chunk) {
           if (err) throw err;
-          console.log('raw: ', chunk.toString());
+          debug('raw: ', chunk.toString());
         });
       } catch (e) {
         throw "json parse error.";
@@ -55,7 +56,7 @@ function a () {
     if (err) {
       throw err;
     } else {
-      console.log('async:', result['readResult'].toString());
+      debug('async:', result['readResult'].toString());
     }
   });
 }
@@ -68,7 +69,7 @@ function e () {
   });
 
   ep.once('result', function(result) {
-    console.log('eventproxy:', result.toString());
+    debug('eventproxy:', result.toString());
   });
 
   ep.once('json', function(json) {
@@ -99,7 +100,7 @@ function b () {
   }).then(JSON.parse).then(function(json) {
     return fsp.readFileAsync('./resources/'+json['hello']);
   }).then(function(result) {
-    console.log('bluebird: '+result.toString());
+    debug('bluebird: '+result.toString());
   })
   .catch(function(err) {
     throw err;
