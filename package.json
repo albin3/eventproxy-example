@@ -11,7 +11,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "DEBUG=problem1 node problem1 & DEBUG=problem2 node problem2 & DEBUG=problem3 node problem3 & DEBUG=problem4 node problem4"
   },
   "repository": {
     "type": "git",
