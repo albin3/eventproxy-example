@@ -90,8 +90,12 @@ a();
 e();
 b();
 
-//****output*****
+//*******************output*********************
+//
 //eventproxy: e
+//
 //bluebird: e
+//
 //async: e
+//
 //raw: e

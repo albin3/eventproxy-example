@@ -125,10 +125,16 @@ a();
 e();
 b();
 
-//output
+//*******************output*********************
+//
 //raw completed.
+//
 //raw completed.
+//
 //raw completed.
+//
 //async completed.
+//
 //eventproxy completed.
+//
 //bluebird completed.
