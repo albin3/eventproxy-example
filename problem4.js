@@ -25,7 +25,7 @@ function r () {
         fs.writeFile('./resources/raw_'+saveAs, _.trim(value)+'\n', function (err) {
           if (err) throw err;
 
-          debug('raw completed.');
+          console.log('raw completed.');
         });
       });
     });
@@ -54,7 +54,7 @@ function a () {
       });
     }, function (err) {
       if (err) throw err;
-      debug('async completed.');
+      console.log('async completed.');
     });
   });
 }
@@ -67,7 +67,7 @@ function e () {
   });
 
   ep.after('write', 3, function (result) {
-    debug('eventproxy completed.');
+    console.log('eventproxy completed.');
   });
 
   ep.once('readJsonList', function(jsonList) {
@@ -99,7 +99,7 @@ function b () {
                                               _.trim(value)+'\n');
                  });
      }).then(function(results) {
-       debug('bluebird completed.');
+       console.log('bluebird completed.');
      }).catch(function(err) {
        throw err;
      });
@@ -113,7 +113,7 @@ function b () {
                    });
        });
      }).then(function(results) {
-       debug('bluebird completed.');
+       console.log('bluebird completed.');
      }).catch(function(err) {
        throw err;
      });

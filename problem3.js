@@ -21,7 +21,7 @@ function r () {
 
         var f = _.trim(file);
         var n = parseInt(_.trim(number));
-        debug('raw: '+f[n]);
+        console.log('raw: '+f[n]);
       });
     });
   });
@@ -46,7 +46,7 @@ function a () {
 
     var f = _.trim(result['r_file']);
     var n = parseInt(_.trim(result['r_number']));
-    debug('async: '+f[n]);
+    console.log('async: '+f[n]);
   });
 }
 
@@ -59,7 +59,7 @@ function e () {
   ep.all('file', 'number', function(file, number) {
     var f = _.trim(file);
     var n = parseInt(_.trim(number));
-    debug('eventproxy: '+f[n]);
+    console.log('eventproxy: '+f[n]);
   });
 
   ep.once('filename', function(filename) {
@@ -79,7 +79,7 @@ function b () {
   Promise.settle([file, number]).then(function(results) {
     var f = _.trim(results[0]._settledValue);
     var n = parseInt(results[1]._settledValue);
-    debug('bluebird: '+f[n]);
+    console.log('bluebird: '+f[n]);
   }).catch(function(err) {
     throw err;
   });

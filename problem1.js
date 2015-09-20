@@ -22,7 +22,7 @@ function r () {
 
         fs.readFile('./resources/'+value, function(err, chunk) {
           if (err) throw err;
-          debug('raw: ', chunk.toString());
+          console.log('raw: ', chunk.toString());
         });
       } catch (e) {
         throw "json parse error.";
@@ -56,7 +56,7 @@ function a () {
     if (err) {
       throw err;
     } else {
-      debug('async:', result['readResult'].toString());
+      console.log('async:', result['readResult'].toString());
     }
   });
 }
@@ -69,7 +69,7 @@ function e () {
   });
 
   ep.once('result', function(result) {
-    debug('eventproxy:', result.toString());
+    console.log('eventproxy:', result.toString());
   });
 
   ep.once('json', function(json) {
@@ -100,7 +100,7 @@ function b () {
   }).then(JSON.parse).then(function(json) {
     return fsp.readFileAsync('./resources/'+json['hello']);
   }).then(function(result) {
-    debug('bluebird: '+result.toString());
+    console.log('bluebird: '+result.toString());
   })
   .catch(function(err) {
     throw err;
