@@ -34,7 +34,7 @@ ep.fail(function(err) {
 });
 
 ep.once('result', function(result) {
-  debug('eventproxy:', result.toString());
+  console.log('eventproxy:', result.toString());
 });
 
 ep.once('json', function(json) {
@@ -75,7 +75,7 @@ ep.fail(function(err) {
   throw err;
 });
 ep.after('file', files.length, function(result) {
-  debug('eventproxy: '+result[0].toString()+result[1].toString()+result[2].toString());
+  console.log('eventproxy: '+result[0].toString()+result[1].toString()+result[2].toString());
 });
 for (var i=0; i<files.length; i++) {
   fs.readFile(files[i], ep.group('file'));
@@ -107,7 +107,7 @@ ep.fail(function(err) {
 ep.all('file', 'number', function(file, number) {
   var f = _.trim(file);
   var n = parseInt(_.trim(number));
-  debug('eventproxy: '+f[n]);
+  console.log('eventproxy: '+f[n]);
 });
 
 ep.once('filename', function(filename) {
@@ -145,7 +145,7 @@ ep.fail(function(err) {
 });
 
 ep.after('write', 3, function (result) {
-  debug('eventproxy completed.');
+  console.log('eventproxy completed.');
 });
 
 ep.once('readJsonList', function(jsonList) {
