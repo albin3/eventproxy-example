@@ -3,7 +3,7 @@ Examples for using EventProxy @ https://github.com/JacksonTian/eventproxy
 
 `problemx.js`中包含使用[Async](https://github.com/caolan/async)、[Bluebird](https://github.com/petkaantonov/bluebird)的写法
 
-Event Proxy的Api文档在[这里](http://html5ify.com/eventproxy/api.html)。
+EventProxy的Api文档在[这里](http://html5ify.com/eventproxy/api.html)。
 
 ## 异步分类
 
