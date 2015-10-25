@@ -96,7 +96,7 @@ async.auto({
     }, 100);
   }]
 }, function(err) {
-  console.log('auto completed.')
+  console.log('auto completed.');
   console.log(arguments);
 });
 
