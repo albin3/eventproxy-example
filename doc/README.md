@@ -177,3 +177,9 @@ async.series([task1, task2, task3], function(err) {
                    result       
 ```
 
+采用调用`监听函数列表递归调用的方式`完成并行任务的控制：
+
+``` 
+
+```
+
