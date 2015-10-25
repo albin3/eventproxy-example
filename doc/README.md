@@ -50,7 +50,7 @@ function only_once(fn) {
                       |             
             +---------+---------+   
             v         v         v   
-          task1     task1     task1 
+          task1     task2     task3 
             |         |         |   
             +---------+---------+   
                       v             
@@ -96,8 +96,6 @@ async.parallel([task1, task2, task3], function(err) {
   console.log(arguments);
 });
 ```
-
-
 
 ### Async.series(Tasks, callback)
 
@@ -161,6 +159,21 @@ async.series([task1, task2, task3], function(err) {
 });
 ```
 
+### Async.auto(Tasks, Callback)
 
+画图看混合运行的流程
 
-### Async.auto
+``` 
+                    start         
+                      |             
+            +---------+---------+   
+            v                   v   
+          task1               task2 
+            |                   |   
+            |                 task3   
+            |                   |   
+            +---------+---------+   
+                      v             
+                   result       
+```
+
