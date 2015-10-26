@@ -67,7 +67,7 @@ async.parallel = function (tasks, callback) {
   var result = [];
 
   tasks.forEach(function (task, key) {	//并行
-    task(function (err, data) {			//传入每个任务的callback是不一样
+    task(function (err, data) {
       completed--;                      //执行结果计数
       if (err) return callback_once(err);
       result[key] = data;
