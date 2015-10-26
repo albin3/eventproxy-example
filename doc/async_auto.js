@@ -14,7 +14,7 @@ async.auto = function (tasks, callback) {
   var i;
 
   var listener = [];
-  listener.push(function () {
+  listener.push(function () {        //[计数]
     if (remainTasks === 0) return callback(null, result);
   });
 
@@ -28,30 +28,29 @@ async.auto = function (tasks, callback) {
     } else {
       task = taskItem;
     }
-    var hook = function (){
-      if (ready(dep)) {
+
+    var hook = function () {
+      if (ready(dep)) {               //依赖完成时，执行自己的task
         var idx = listener.indexOf(hook);
         if (idx >= 0) listener.splice(idx, 1);
         remainTasks--;
-        task((function (taskKey) {
-          return function (err, data) {
-            result[taskKey] = data;
-            done(err, data);
-          }
-        })(taskKey));
+        task(function (err, data) {
+          result[taskKey] = data;
+          done(err, data);
+        }, result);
       }
     };
-    listener.push(hook);
+    listener.push(hook);              //注册各自的监听器
   });
 
-  function done(err, data) {
+  function done(err, data) {          //每当有任务完成时，执行所有监听器[递归调用]
     if (err) return callback(err);
     listener.forEach(function(fn) {
       fn();
     });
   }
 
-  function ready(dep) {
+  function ready(dep) {               //依赖是否完成
     var i;
     for (i = 0; i < dep.length; i++) {
       if(!result.hasOwnProperty(dep[i])) {
@@ -61,24 +60,9 @@ async.auto = function (tasks, callback) {
     return true;
   }
 
-  done();         //触发第一次
+  done();                             //触发第一次
 }
 
-function task1(cb) {
-  setTimeout(function () {
-    cb(null, 'task1 completed.');
-  }, 600);
-}
-function task2(cb) {
-  setTimeout(function () {
-    cb(null, 'task2 completed.')
-  }, 300);
-}
-function task3(cb) {
-  setTimeout(function () {
-    cb(null, 'task3 completed.');
-  }, 200);
-}
 async.auto({
   task1: function (cb) {
     setTimeout(function () {
@@ -90,9 +74,9 @@ async.auto({
       cb(null, 'task2 completed.');
     }, 300);
   },
-  task3: ['task1', function (cb) {
+  task3: ['task1', function (cb, result) {
     setTimeout(function () {
-      cb(null, 'task3 completed.');
+      cb(null, result.task2 + ', task3 completed.');
     }, 100);
   }]
 }, function(err) {
