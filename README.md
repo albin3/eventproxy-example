@@ -1,6 +1,8 @@
 # eventproxy-example
 Examples for using EventProxy @ https://github.com/JacksonTian/eventproxy
 
+详细的Async和Promise介绍见[doc](https://github.com/albin3/eventproxy-example/tree/master/doc)
+
 `problemx.js`中包含使用[Async](https://github.com/caolan/async)、[Bluebird](https://github.com/petkaantonov/bluebird)的写法
 
 EventProxy的Api文档在[这里](http://html5ify.com/eventproxy/api.html)。
