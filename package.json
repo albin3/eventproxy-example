@@ -7,7 +7,7 @@
     "eventproxy": "0.3.4",
     "bluebird": "2.9.34",
     "lodash": "3.10.0",
-    "debug": "2.2.0"
+    "debug": "2.6.9"
   },
   "main": "index.js",
   "scripts": {
